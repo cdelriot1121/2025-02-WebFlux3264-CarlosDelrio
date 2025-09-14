@@ -1,5 +1,7 @@
 package controller;
 
+import dto.GeneralResponse;
+import dto.UpdateEstudianteRequest;
 import entities.Estudiantes;
 import java.util.List;
 import services.EstudianteService;
@@ -19,7 +21,6 @@ public class EstudianteController {
             return false;
         }
         
-        
         if (existeCorreo(estudiante.getCorreo())) {
             System.out.println("El correo ya está registrado en la base de datos");
             return false;
@@ -31,12 +32,10 @@ public class EstudianteController {
     public boolean existeCorreo(String correo) {
         return estudianteService.existeCorreo(correo);
     }
-
       
     public List<Estudiantes> consultarTodos() {
         return estudianteService.consultarTodos();
     }
-
     
     public Estudiantes consultarPorEmail(String correo) {
         if (correo == null || correo.trim().isEmpty() || !correo.contains("@")) {
@@ -45,5 +44,31 @@ public class EstudianteController {
         }
         return estudianteService.consultarPorEmail(correo);
     }
-}
     
+    public boolean validarId(long id) {
+        return estudianteService.validarId(id);
+    }
+    
+    public GeneralResponse actualizarEstudiante(UpdateEstudianteRequest estudianteRequest, long id) {
+        if (estudianteRequest.nombre() == null || estudianteRequest.nombre().trim().isEmpty() 
+            || estudianteRequest.apellido() == null || estudianteRequest.apellido().trim().isEmpty()
+            || estudianteRequest.edad() < 0 || estudianteRequest.estadoCivil() == null) {
+            return new GeneralResponse("Error: datos de estudiante inválidos");
+        }
+        
+        return estudianteService.actualizarEstudiante(estudianteRequest, id);
+    }
+    
+    public GeneralResponse eliminarEstudiante(long id) {
+        if (id <= 0) {
+            return new GeneralResponse("Error: ID inválido");
+        }
+        
+        if (!validarId(id)) {
+            return new GeneralResponse("Error: el estudiante con ID " + id + " no existe");
+        }
+        
+        return estudianteService.eliminarEstudiante(id);
+    }
+}
+
