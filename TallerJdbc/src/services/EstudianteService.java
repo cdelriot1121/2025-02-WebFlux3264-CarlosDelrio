@@ -4,6 +4,7 @@ import connection.ClassConection;
 import entities.Estudiantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EstudianteService {
@@ -29,6 +30,27 @@ public class EstudianteService {
             return false;
         }
 
+    }
+
+
+    //cree este metodo para aplicarlo luego ;)
+    public boolean existeCorreo(String correo) {
+        String sql = "SELECT COUNT(*) FROM estudiantes WHERE correo = ?";
+        
+        try (Connection conn = ClassConection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, correo);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Error al verificar correo: " + e.getMessage());
+        }
+        return false;
     }
 
     
