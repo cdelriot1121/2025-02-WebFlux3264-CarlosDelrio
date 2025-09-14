@@ -3,6 +3,7 @@ import controller.EstudianteController;
 import entities.EstadoCivil;
 import entities.Estudiantes;
 import java.sql.Connection;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -13,7 +14,7 @@ public class App {
             System.out.println("Acerca de la conexión: " + connection.getMetaData().getDatabaseProductName());
         } catch (Exception e) {
             System.out.println("Error para conectar a la base de datos");
-            return; // Salimos si no hay conexión
+            return; 
         }
         
         // tenemos que instanciar el controlador que va a interactuar y recibir peticiones a la vista (terminal en este caso)
@@ -52,10 +53,10 @@ public class App {
                     System.out.println("Opción pendiente de implementar por tus compañeros");
                     break;
                 case 4:
-                    System.out.println("Opción pendiente de implementar por tus compañeros");
+                    consultarTodosLosEstudiantes(controller);
                     break;
                 case 5:
-                    System.out.println("Opción pendiente de implementar por tus compañeros");
+                    consultarEstudiantePorEmail(scanner, controller);
                     break;
                 case 6:
                     System.out.println("¡Gracias por utilizar el sistema!");
@@ -154,6 +155,35 @@ public class App {
             System.out.println("¡Estudiante registrado exitosamente!");
         } else {
             System.out.println("Error al registrar el estudiante");
+        }
+    }
+    
+    private static void consultarTodosLosEstudiantes(EstudianteController controller) {
+        System.out.println("\n=== CONSULTAR TODOS LOS ESTUDIANTES ===");
+        List<Estudiantes> lista = controller.consultarTodos();
+        
+        if (lista.isEmpty()) {
+            System.out.println("No hay estudiantes registrados en el sistema.");
+        } else {
+            System.out.println("Lista de estudiantes:");
+            for (Estudiantes e : lista) {
+                System.out.println(e);
+            }
+        }
+    }
+    
+    private static void consultarEstudiantePorEmail(Scanner scanner, EstudianteController controller) {
+        System.out.println("\n=== CONSULTAR ESTUDIANTE POR EMAIL ===");
+        System.out.print("Ingrese el correo del estudiante: ");
+        String email = scanner.nextLine();
+
+        Estudiantes estudiante = controller.consultarPorEmail(email);
+
+        if (estudiante != null) {
+            System.out.println("Estudiante encontrado:");
+            System.out.println(estudiante);
+        } else {
+            System.out.println("No se encontró ningún estudiante con ese correo.");
         }
     }
 }

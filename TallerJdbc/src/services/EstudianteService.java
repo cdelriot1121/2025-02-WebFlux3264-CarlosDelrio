@@ -1,11 +1,14 @@
 package services;
 
 import connection.ClassConection;
+import entities.EstadoCivil;
 import entities.Estudiantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EstudianteService {
 
@@ -52,6 +55,64 @@ public class EstudianteService {
         }
         return false;
     }
+
+
+    //Metodos para listar estudiante y buscar por Email
+
+            public List<Estudiantes> consultarTodos() {
+        List<Estudiantes> lista = new ArrayList<>();
+        String sql = "SELECT * FROM estudiantes";
+
+        try (Connection conn = ClassConection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Estudiantes e = new Estudiantes(
+                        rs.getLong("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getString("correo"),
+                        rs.getInt("edad"),
+                        EstadoCivil.valueOf(rs.getString("estado_civil"))
+                );
+                lista.add(e);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al consultar todos: " + e.getMessage());
+        }
+        return lista;
+    }
+
+    
+        public Estudiantes consultarPorEmail(String correo) {
+            Estudiantes estudiante = null;
+            String sql = "SELECT * FROM estudiantes WHERE correo = ?";
+
+            try (Connection conn = ClassConection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                stmt.setString(1, correo);
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    estudiante = new Estudiantes(
+                            rs.getLong("id"),
+                            rs.getString("nombre"),
+                            rs.getString("apellido"),
+                            rs.getString("correo"),
+                            rs.getInt("edad"),
+                            EstadoCivil.valueOf(rs.getString("estado_civil"))
+                    );
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Error al consultar por email: " + e.getMessage());
+            }
+            return estudiante;
+        }
+
 
     
 }

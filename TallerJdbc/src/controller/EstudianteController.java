@@ -1,6 +1,7 @@
 package controller;
 
 import entities.Estudiantes;
+import java.util.List;
 import services.EstudianteService;
 
 public class EstudianteController {
@@ -18,7 +19,7 @@ public class EstudianteController {
             return false;
         }
         
-        // Verificar si el correo ya existe
+        
         if (existeCorreo(estudiante.getCorreo())) {
             System.out.println("El correo ya está registrado en la base de datos");
             return false;
@@ -30,10 +31,19 @@ public class EstudianteController {
     public boolean existeCorreo(String correo) {
         return estudianteService.existeCorreo(correo);
     }
+
+      
+    public List<Estudiantes> consultarTodos() {
+        return estudianteService.consultarTodos();
+    }
+
     
-    // Aquí tus compañeros podrán implementar los demás métodos del CRUD:
-    // - actualizarEstudiante
-    // - eliminarEstudiante
-    // - listarEstudiantes
-    // - buscarEstudiantePorEmail
+    public Estudiantes consultarPorEmail(String correo) {
+        if (correo == null || correo.trim().isEmpty() || !correo.contains("@")) {
+            System.out.println("Correo inválido");
+            return null;
+        }
+        return estudianteService.consultarPorEmail(correo);
+    }
 }
+    
