@@ -33,7 +33,7 @@ public class EstudianteService {
     }
 
 
-    //cree este metodo para aplicarlo luego ;)
+    
     public boolean existeCorreo(String correo) {
         String sql = "SELECT COUNT(*) FROM estudiantes WHERE correo = ?";
         

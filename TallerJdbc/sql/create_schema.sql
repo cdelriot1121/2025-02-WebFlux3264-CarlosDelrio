@@ -1,0 +1,14 @@
+CREATE DATABASE IF NOT EXISTS estudianteTest;
+
+
+USE estudianteTest;
+
+
+CREATE TABLE estudiantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    correo VARCHAR(150) NOT NULL UNIQUE,
+    edad INT NOT NULL,
+    estado_civil ENUM('SOLTERO', 'CASADO', 'VIUDO', 'UNION_LIBRE', 'DIVORCIADO') NOT NULL
+);
