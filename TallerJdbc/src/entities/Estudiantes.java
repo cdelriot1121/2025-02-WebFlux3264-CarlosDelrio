@@ -10,9 +10,7 @@ public class Estudiantes {
     private String nombre;
     private String apellido;
     private String correo;
-    private Integer edad;
-
-    
+    private int edad;
     private EstadoCivil estadoCivil;
     
     
@@ -20,7 +18,7 @@ public class Estudiantes {
     }
     
     
-    public Estudiantes(String nombre, String apellido, String correo, Integer edad, EstadoCivil estadoCivil) {
+    public Estudiantes(String nombre, String apellido, String correo, int edad, EstadoCivil estadoCivil) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
@@ -29,7 +27,7 @@ public class Estudiantes {
     }
     
     
-    public Estudiantes(Long id, String nombre, String apellido, String correo, Integer edad, EstadoCivil estadoCivil) {
+    public Estudiantes(Long id, String nombre, String apellido, String correo, int edad, EstadoCivil estadoCivil) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -42,47 +40,47 @@ public class Estudiantes {
     public Long getId() {
         return id;
     }
-    
+
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
-    
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     public String getApellido() {
         return apellido;
     }
-    
+
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    
+
     public String getCorreo() {
         return correo;
     }
-    
+
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
-    public Integer getEdad() {
+
+    public int getEdad() {
         return edad;
     }
-    
-    public void setEdad(Integer edad) {
+
+    public void setEdad(int edad) {
         this.edad = edad;
     }
-    
+
     public EstadoCivil getEstadoCivil() {
         return estadoCivil;
     }
-    
+
     public void setEstadoCivil(EstadoCivil estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
@@ -111,4 +109,6 @@ public class Estudiantes {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    
 }
