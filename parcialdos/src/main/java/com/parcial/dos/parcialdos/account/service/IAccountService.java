@@ -7,6 +7,7 @@ import com.parcial.dos.parcialdos.account.dto.AccountResponseDTO;
 import com.parcial.dos.parcialdos.account.dto.AccountOwnerBalanceDTO;
 
 public interface IAccountService {
+    
     AccountResponseDTO create(AccountRequestDTO request);
     List<AccountResponseDTO> getAll();
     AccountResponseDTO getById(Long id);

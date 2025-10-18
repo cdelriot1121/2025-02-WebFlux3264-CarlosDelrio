@@ -27,7 +27,7 @@ public class AccountController {
 
     @GetMapping
     public ResponseEntity<List<AccountResponseDTO>> getAll() {
-        return null
+        return null;
     }
 
     @GetMapping("/{id}")
