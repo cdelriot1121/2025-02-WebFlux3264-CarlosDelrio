@@ -1,34 +1,35 @@
 package com.parcial.dos.parcialdos.account.dto;
 
+import java.math.BigDecimal;
 
 public class AccountOwnerBalanceDTO {
     private String dueno;
-    private Double balanceActual;
-    
+    private BigDecimal balanceActual;
+
     // Constructor vacío
     public AccountOwnerBalanceDTO() {
     }
-    
+
     // Constructor con parámetros
-    public AccountOwnerBalanceDTO(String dueno, Double balanceActual) {
+    public AccountOwnerBalanceDTO(String dueno, BigDecimal balanceActual) {
         this.dueno = dueno;
         this.balanceActual = balanceActual;
     }
-    
+
     // Getters y setters
     public String getDueno() {
         return dueno;
     }
-    
+
     public void setDueno(String dueno) {
         this.dueno = dueno;
     }
-    
-    public Double getBalanceActual() {
+
+    public BigDecimal getBalanceActual() {
         return balanceActual;
     }
-    
-    public void setBalanceActual(Double balanceActual) {
+
+    public void setBalanceActual(BigDecimal balanceActual) {
         this.balanceActual = balanceActual;
     }
 }

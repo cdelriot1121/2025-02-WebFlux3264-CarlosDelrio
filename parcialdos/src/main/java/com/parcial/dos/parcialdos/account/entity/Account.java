@@ -6,21 +6,57 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "accounts")
 public class Account {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(unique = true)
+    private String accountNumber;
+    
+    private String ownerName;
+    
+    private BigDecimal balance;
+    
+    private boolean active;
 
-  
-    private Long id;    
-    private String accountNumber;    
-    private String ownerName;    
-    private BigDecimal balance = BigDecimal.ZERO;   
-    private Boolean active = true;
+    // Getters y Setters
+    public Long getId() {
+        return id;
+    }
 
-    public Account() {}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Account(String accountNumber, String ownerName, BigDecimal balance, Boolean active) {
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
-        this.ownerName = ownerName;
-        this.balance = balance == null ? BigDecimal.ZERO : balance;
-        this.active = active == null ? true : active;
     }
 
+    public String getOwnerName() {
+        return ownerName;
     }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+}
